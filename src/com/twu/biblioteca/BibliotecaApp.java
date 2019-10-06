@@ -8,13 +8,16 @@ public class BibliotecaApp {
 
         WelcomeMessage.printWelcomeMessage();
 
-        ArrayList<Book> list = new ArrayList<Book>();
-        //add random books to list
-        list.add(new Book("title1", "author1", "1991"));
-        list.add(new Book("title2", "author2", "1992"));
-        list.add(new Book("title3", "author3", "1993"));
+//        ArrayList<Book> list = new ArrayList<Book>();
+//        //add random books to list
+//        list.add(new Book("title1", "author1", "1991"));
+//        list.add(new Book("title2", "author2", "1992"));
+//        list.add(new Book("title3", "author3", "1993"));
 
-        BookList.displayList(list);
+
+
+        Menu.menu();
+
 
     }
 
