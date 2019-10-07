@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,8 +8,6 @@ import java.util.ArrayList;
 
 public class BibliotecaInterface extends JFrame{
     private JButton QUITButton;
-    private JTable bookTable;
-    private JTable table2;
     private JButton listOfBooksButton;
     private JButton listOfMoviesButton;
     private JTextField checkOutBook;
@@ -22,15 +19,20 @@ public class BibliotecaInterface extends JFrame{
     private JButton checkOutBB;
     private JButton checkOutMB;
     private JButton returnBB;
+    private JTextArea movielist;
+    private JButton login;
+    private JPanel libraryFunctions;
+    private JTextArea booksCheckedOut;
 
 
     public BibliotecaInterface() {
 
         BookList.BookList();
+        MovieList.MovieList();
         listOfBooksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateBookList(booklist);
+                updateBookList(booklist, BookList.getBookList());
 //                String[] columnNames = {"Title", "Author", "Year Published"};
 //                DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 //                bookTable = new JTable(tableModel);
@@ -54,11 +56,19 @@ public class BibliotecaInterface extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //when button is clicked get the input and check the book out.
                 String bookInput = checkOutBook.getText();
-                checkOut.checkOut(bookInput, BookList.getBookList());
-                //need error handling for wrong input and stuff
-                updateBookList(booklist);
-                JOptionPane.showMessageDialog(null, "Thank you! Enjoy the book");
-                checkOutBook.setText("");
+                //check if input text is acceptable.
+                if(bookInput.equals("")){
+                    JOptionPane.showMessageDialog(null, "Please enter a book to check out");
+                }
+                else if (checkOut.containsBook(bookInput, BookList.getBookList())){
+                    checkOut.checkOutBook(bookInput, BookList.getBookList());
+                    updateBookList(booklist, BookList.getBookList());
+                    updateBookList(booksCheckedOut, checkOut.getCheckedOut());
+                    JOptionPane.showMessageDialog(null, "Thank you! Enjoy the book");
+                    checkOutBook.setText("");
+                } else{
+                    JOptionPane.showMessageDialog(null, "Please select a valid option");
+                }
             }
         });
         returnBB.addActionListener(new ActionListener() {
@@ -66,12 +76,87 @@ public class BibliotecaInterface extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //return book
                 String returnInput = returnBook.getText();
-                ReturnBook.ReturnBook(returnInput, checkOut.getCheckedOut());
-                updateBookList(booklist);
-                JOptionPane.showMessageDialog(null, "Thank you for returning the book");
-                returnBook.setText("");
+                if(returnInput.equals("")){
+                    JOptionPane.showMessageDialog(null, "Please enter a book to check out");
+                }
+                else if(checkOut.containsBook(returnInput, checkOut.getCheckedOut())){
+                    ReturnBook.ReturnBook(returnInput, checkOut.getCheckedOut());
+                    updateBookList(booklist, BookList.getBookList());
+                    updateBookList(booksCheckedOut, checkOut.getCheckedOut());
+                    JOptionPane.showMessageDialog(null, "Thank you for returning the book");
+                    returnBook.setText("");
+                } else{
+                    JOptionPane.showMessageDialog(null, "Please select a valid option");
+                }
+
             }
         });
+        QUITButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        listOfMoviesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateMovieList(movielist);
+            }
+        });
+        checkOutMB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //when button is clicked get the input and check the book out.
+                String movieInput = checkOutMovie.getText();
+                //check if input text is acceptable.
+                if(movieInput.equals("")){
+                    JOptionPane.showMessageDialog(null, "Please enter a movie to check out");
+                }
+                else if (checkOut.containsMovie(movieInput, MovieList.getMovieList())){
+                    checkOut.checkOutMovie(movieInput, MovieList.getMovieList());
+                    updateMovieList(movielist);
+                    JOptionPane.showMessageDialog(null, "Thank you! Enjoy the movie");
+                    checkOutMovie.setText("");
+                } else{
+                    JOptionPane.showMessageDialog(null, "Please select a valid option");
+                }
+            }
+        });
+
+        libraryFunctions.setVisible(false);
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //code from https://tech.chitgoks.com/2012/12/05/how-to-create-a-login-password-dialog-using-only-joptionpane/
+                //shortcut to making login using JOptionPane
+                JLabel label_login = new JLabel("Username:");
+                JTextField login = new JTextField();
+
+                JLabel label_password = new JLabel("Password:");
+                JPasswordField password = new JPasswordField();
+
+                Object[] array = { label_login,  login, label_password, password };
+
+                int res = JOptionPane.showConfirmDialog(null, array, "Login",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE);
+
+                if (res == JOptionPane.OK_OPTION) {
+                    //check if credentials are correct.
+                    //if not try again and open box again
+
+                    //set variable for current user here.
+                    System.out.println("username: " + login.getText().trim());
+                    System.out.println("password: " + new String(password.getPassword()));
+
+                    //when login the jpanel is shown else its hidden
+                    libraryFunctions.setVisible(true);
+                }
+
+            }
+        });
+
+        updateBookList(booksCheckedOut, checkOut.getCheckedOut());
     }
 
     public static void main(String[] args){
@@ -82,16 +167,23 @@ public class BibliotecaInterface extends JFrame{
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-
-
     }
 
-    public static void updateBookList(JTextArea list){
+    public static void updateBookList(JTextArea list, ArrayList<Book> booklist){
         list.setText("");
 
         int i = 0;
-        while (i< BookList.getBookList().size()){
-            list.append(BookList.getBookList().get(i).toString());
+        while (i< booklist.size()){
+            list.append(booklist.get(i).toString());
+            i++;
+        }
+    }
+    public static void updateMovieList(JTextArea list){
+        list.setText("");
+
+        int i = 0;
+        while (i< MovieList.getMovieList().size()){
+            list.append(MovieList.getMovieList().get(i).toString());
             i++;
         }
     }

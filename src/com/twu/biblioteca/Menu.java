@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -79,7 +78,7 @@ public class Menu {
     public static void performAction2(int userInput){
         if( userInput == 1){
             System.out.println("\n Choose a book to check-out");
-            checkOut.checkOut(getBookInput(), BookList.getBookList());
+            checkOut.checkOutBook(getBookInput(), BookList.getBookList());
         }
         else if (userInput == 2){
             System.out.println("\n Chose a book to return");
