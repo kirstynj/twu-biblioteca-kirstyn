@@ -20,9 +20,11 @@ public class BibliotecaInterface extends JFrame{
     private JButton checkOutMB;
     private JButton returnBB;
     private JTextArea movielist;
-    private JButton login;
+    private JButton loginbtn;
     private JPanel libraryFunctions;
     private JTextArea booksCheckedOut;
+    private JButton viewInfo;
+    private JTextArea userInfo;
 
 
     public BibliotecaInterface() {
@@ -124,7 +126,10 @@ public class BibliotecaInterface extends JFrame{
         });
 
         libraryFunctions.setVisible(false);
-        login.addActionListener(new ActionListener() {
+        userInfo.setVisible(false);
+        viewInfo.setVisible(false);
+        UserList.UserList();
+        loginbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //code from https://tech.chitgoks.com/2012/12/05/how-to-create-a-login-password-dialog-using-only-joptionpane/
@@ -143,14 +148,22 @@ public class BibliotecaInterface extends JFrame{
 
                 if (res == JOptionPane.OK_OPTION) {
                     //check if credentials are correct.
-                    //if not try again and open box again
+                    if (Login.Login(login.getText().trim(), new String(password.getPassword()), UserList.getUsers())){
+                        System.out.println("username: " + login.getText().trim());
+                        System.out.println("password: " + new String(password.getPassword()));
 
-                    //set variable for current user here.
-                    System.out.println("username: " + login.getText().trim());
-                    System.out.println("password: " + new String(password.getPassword()));
+                        //when login the jpanel is shown else its hidden
+                        libraryFunctions.setVisible(true);
+                        userInfo.setVisible(true);
+                        viewInfo.setVisible(true);
+                        loginbtn.setVisible(false);
 
-                    //when login the jpanel is shown else its hidden
-                    libraryFunctions.setVisible(true);
+                     //this doesnt work   User currentUser = UserList.findUser(login.getText().trim());
+                       // userInfo.append("Name:" + currentUser.getName()+ " email:" + currentUser.getEmail());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Incorrect credentials");
+                    }
                 }
 
             }
