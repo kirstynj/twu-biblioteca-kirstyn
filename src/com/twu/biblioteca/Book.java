@@ -21,13 +21,13 @@ public class Book {
         return author;
     }
 
-    public String year(){
+    public String getYear(){
         return year;
     }
 
     @Override
     public String toString(){
-        return "Title: " + title + " | Author: " + author + " | Year of Publication: " + year ;
+        return "Title: " + title + " | Author: " + author + " | Year of Publication: " + year +"\n" ;
 
     }
 }

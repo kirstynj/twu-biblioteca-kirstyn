@@ -17,7 +17,7 @@ public class Menu {
     }
     //print menu
     private static void printMenu(){
-        System.out.println("Make a selection");
+        System.out.println("\n Make a selection");
         System.out.println("1) List of books");
         System.out.println("0) Quit");
     }
@@ -51,19 +51,52 @@ public class Menu {
         }
     }
 
+    public static void useInput2(int userInput){
+        //if its an invalid option
+        if (userInput < 1 || userInput > 2){
+            String invalidNumberMessage;
+            invalidNumberMessage = "Please select a valid option!\n";
+            System.out.println(invalidNumberMessage);
+        }
+        else {
+            performAction2(userInput);
+        }
+    }
+
     //perform the action
     public static void performAction(int userInput){
         if (userInput == 1){
-            ArrayList<Book> list = new ArrayList<Book>();
-            //add random books to list
-            list.add(new Book("title1", "author1", "1991"));
-            list.add(new Book("title2", "author2", "1992"));
-            list.add(new Book("title3", "author3", "1993"));
-
-            BookList.displayList(list);
+            BookList.displayList();
+            //option to select checkout or return
+            printMenu2();
+            useInput2(getInput());
         }
         else if (userInput == 0){
             quit = true;
         }
+    }
+
+    public static void performAction2(int userInput){
+        if( userInput == 1){
+            System.out.println("\n Choose a book to check-out");
+            checkOut.checkOut(getBookInput(), BookList.getBookList());
+        }
+        else if (userInput == 2){
+            System.out.println("\n Chose a book to return");
+            ReturnBook.ReturnBook(getBookInput(), checkOut.getCheckedOut());
+        }
+    }
+
+    private static String getBookInput(){
+        //scanner to get book for checkout
+        Scanner scanner = new Scanner(System.in);
+        String userInput;
+        userInput = scanner.nextLine();
+        return userInput;
+    }
+
+    private static void printMenu2(){
+        System.out.println("\n1) check-out a book!");
+        System.out.println("2) return a book!");
     }
 }
