@@ -11,6 +11,7 @@ public class Login {
                 if (users.get(i).getPassword().equals(password)){
                     //correct credentials
                     return true;
+
                 }
             }
             i++;

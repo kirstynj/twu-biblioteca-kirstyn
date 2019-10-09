@@ -127,7 +127,6 @@ public class BibliotecaInterface extends JFrame{
 
         libraryFunctions.setVisible(false);
         userInfo.setVisible(false);
-        viewInfo.setVisible(false);
         UserList.UserList();
         loginbtn.addActionListener(new ActionListener() {
             @Override
@@ -155,11 +154,10 @@ public class BibliotecaInterface extends JFrame{
                         //when login the jpanel is shown else its hidden
                         libraryFunctions.setVisible(true);
                         userInfo.setVisible(true);
-                        viewInfo.setVisible(true);
                         loginbtn.setVisible(false);
 
-                     //this doesnt work   User currentUser = UserList.findUser(login.getText().trim());
-                       // userInfo.append("Name:" + currentUser.getName()+ " email:" + currentUser.getEmail());
+                        User currentUser = UserList.findUser(login.getText().trim());
+                        userInfo.append("Name:" + currentUser.getName()+ " email:" + currentUser.getEmail() + "Phone Number: "+ currentUser.getNumber().toString());
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Incorrect credentials");
