@@ -3,28 +3,29 @@ package com.twu.biblioteca;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
 import java.util.*;
 
 public class checkOutTest {
 
+    @Test
+    public void TestCheckOut() {
+        Book book1 = new Book("title1", "author1", "1991");
+        Book book2 = new Book("title2", "author2", "1992");
+        Book book3 = new Book("title3", "author3", "1993");
 
-  //  ArrayList<Book> list = BookList.getBookList();
+        //test list with title3 missing
+        ArrayList<Book> testList = new ArrayList<Book>();
+        testList.add(book1);
+        testList.add(book2);
 
-//idk why this isnt working
-//    @Test
-//    public void TestCheckOut() {
-//        //test list with title3 missing
-//        ArrayList<Book> testList = new ArrayList<Book>();
-//        testList.add(new Book("title1", "author1", "1991"));
-//        testList.add(new Book("title2", "author2", "1992"));
-//
-//        ArrayList<Book> list = new ArrayList<Book>();
-//        list.add(new Book("title1", "author1", "1991"));
-//        list.add(new Book("title2", "author2", "1992"));
-//        list.add(new Book("title3", "author3", "1993"));
-//
-//        checkOut.checkOut("title3", list);
-//
-//        assertEquals(true, list.equals(testList));
-//    }
+        ArrayList<Book> list = new ArrayList<Book>();
+        list.add(book1);
+        list.add(book2);
+        list.add(book3);
+
+        checkOut.checkOutBook("title3", list);
+
+        assertEquals(testList, list);
+    }
 }
