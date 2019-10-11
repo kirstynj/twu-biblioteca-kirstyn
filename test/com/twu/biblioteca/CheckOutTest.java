@@ -28,4 +28,29 @@ public class CheckOutTest {
 
         assertEquals(testList, list);
     }
+
+    @Test
+    public void shouldReturnBookSuccessMessage(){
+        String expectedMessage = "Thank you! Enjoy the book";
+
+        ArrayList<Book> testBookList = new ArrayList<Book>();
+        testBookList.add(new Book("title1", "author1", "1991"));
+        testBookList.add(new Book("title2", "author2", "1992"));
+        testBookList.add(new Book("title3", "author3", "1993"));
+
+        assertEquals(expectedMessage, CheckOut.checkOutBook("title2", testBookList));
+
+    }
+    @Test
+    public void shouldReturnBookFailMessage(){
+        String expectedMessage = "Sorry, that book is not available";
+
+        ArrayList<Book> testBookList = new ArrayList<Book>();
+        testBookList.add(new Book("title1", "author1", "1991"));
+        testBookList.add(new Book("title2", "author2", "1992"));
+        testBookList.add(new Book("title3", "author3", "1993"));
+
+        assertEquals(expectedMessage, CheckOut.checkOutBook("title", testBookList));
+
+    }
 }

@@ -7,14 +7,22 @@ public class CheckOut {
     private static ArrayList<Book> checkedOut = new ArrayList<Book>();
     private static ArrayList<Movie> checkedOutMovie = new ArrayList<Movie>();
 
-    public static void checkOutBook(String input, ArrayList<Book> list){
+    public static String getBookSuccessMessage(){
+        return "Thank you! Enjoy the book";
+    }
+    public static String getBookFailMessage(){
+        return "Sorry, that book is not available";
+    }
+
+    public static String checkOutBook(String input, ArrayList<Book> list){
         //get the input string, search the arraylist of books - title for a match
         //then remove the book from the list and add it to the new list checkedOut
         boolean contains = false;
+        String returnMessage = null;
         int i =0;
         while (i< list.size()){
             if (list.get(i).getTitle().equals(input)){
-                System.out.println("Thank you! Enjoy the book");
+                returnMessage =  getBookSuccessMessage();
                 //add to new list
                 checkedOut.add(list.get(i));
                 //remove book from list
@@ -25,9 +33,11 @@ public class CheckOut {
             i++;
         }
         if (!contains){
-            System.out.println("Sorry, that book is not available");
+            returnMessage = getBookFailMessage();
         }
+        return returnMessage;
     }
+
     public static void checkOutMovie(String input, ArrayList<Movie> list){
         //get the input string, search the arraylist of books - title for a match
         //then remove the book from the list and add it to the new list checkedOut

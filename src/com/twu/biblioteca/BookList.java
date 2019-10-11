@@ -18,11 +18,9 @@ public class BookList {
         return bookList;
     }
 
-
     public static void displayList(){
         int i=0;
         while (i < bookList.size()){
-
             System.out.println(bookList.get(i).toString());
             i++;
         }
