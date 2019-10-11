@@ -86,7 +86,7 @@ public class Menu {
         }
         else if (userInput == 2){
             System.out.println("\n Chose a book to return");
-            ReturnBook.ReturnBook(getBookInput(), CheckOut.getCheckedOut());
+            System.out.println(ReturnBook.ReturnBook(getBookInput(), CheckOut.getCheckedOut()));
         }
     }
 

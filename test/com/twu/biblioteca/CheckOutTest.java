@@ -51,6 +51,5 @@ public class CheckOutTest {
         testBookList.add(new Book("title3", "author3", "1993"));
 
         assertEquals(expectedMessage, CheckOut.checkOutBook("title", testBookList));
-
     }
 }
