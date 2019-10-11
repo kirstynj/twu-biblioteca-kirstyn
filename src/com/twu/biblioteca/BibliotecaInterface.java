@@ -82,7 +82,7 @@ public class BibliotecaInterface extends JFrame{
                     JOptionPane.showMessageDialog(null, "Please enter a book to check out");
                 }
                 else if(CheckOut.containsBook(returnInput, CheckOut.getCheckedOut())){
-                    ReturnBook.ReturnBook(returnInput, CheckOut.getCheckedOut());
+                    ReturnBook.ReturnBook(returnInput, CheckOut.getCheckedOut(), BookList.getBookList());
                     updateBookList(booklist, BookList.getBookList());
                     updateBookList(booksCheckedOut, CheckOut.getCheckedOut());
                     JOptionPane.showMessageDialog(null, "Thank you for returning the book");

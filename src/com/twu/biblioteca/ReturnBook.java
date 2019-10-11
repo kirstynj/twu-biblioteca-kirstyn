@@ -11,7 +11,7 @@ public class ReturnBook {
         return "That is not a valid book to return";
     }
 
-    public static String ReturnBook(String input, ArrayList<Book> checkedOutList){
+    public static String ReturnBook(String input, ArrayList<Book> checkedOutList, ArrayList<Book> currentBookList){
         String returnMessage = null;
         boolean contains = false;
         int i =0;
@@ -19,13 +19,16 @@ public class ReturnBook {
             if (checkedOutList.get(i).getTitle().equals(input)){
                 returnMessage = getBookReturnSuccessMessage();
                 //add back to booklist
-                BookList.getBookList().add(checkedOutList.get(i));
+                currentBookList.add(checkedOutList.get(i));
                 //remove book from checked out list
                 checkedOutList.remove(i);
                 contains = true;
                 break;
             }
             i++;
+        }
+        for (Book book : checkedOutList) {
+
         }
         if (!contains){
             returnMessage = getBookReturnFailMessage();
