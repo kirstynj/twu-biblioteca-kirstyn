@@ -6,10 +6,10 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-public class checkOutTest {
+public class CheckOutTest {
 
     @Test
-    public void TestCheckOut() {
+    public void testCheckOut() {
         Book book1 = new Book("title1", "author1", "1991");
         Book book2 = new Book("title2", "author2", "1992");
         Book book3 = new Book("title3", "author3", "1993");
@@ -24,7 +24,7 @@ public class checkOutTest {
         list.add(book2);
         list.add(book3);
 
-        checkOut.checkOutBook("title3", list);
+        CheckOut.checkOutBook("title3", list);
 
         assertEquals(testList, list);
     }

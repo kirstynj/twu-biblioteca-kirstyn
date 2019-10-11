@@ -62,10 +62,10 @@ public class BibliotecaInterface extends JFrame{
                 if(bookInput.equals("")){
                     JOptionPane.showMessageDialog(null, "Please enter a book to check out");
                 }
-                else if (checkOut.containsBook(bookInput, BookList.getBookList())){
-                    checkOut.checkOutBook(bookInput, BookList.getBookList());
+                else if (CheckOut.containsBook(bookInput, BookList.getBookList())){
+                    CheckOut.checkOutBook(bookInput, BookList.getBookList());
                     updateBookList(booklist, BookList.getBookList());
-                    updateBookList(booksCheckedOut, checkOut.getCheckedOut());
+                    updateBookList(booksCheckedOut, CheckOut.getCheckedOut());
                     JOptionPane.showMessageDialog(null, "Thank you! Enjoy the book");
                     checkOutBook.setText("");
                 } else{
@@ -81,10 +81,10 @@ public class BibliotecaInterface extends JFrame{
                 if(returnInput.equals("")){
                     JOptionPane.showMessageDialog(null, "Please enter a book to check out");
                 }
-                else if(checkOut.containsBook(returnInput, checkOut.getCheckedOut())){
-                    ReturnBook.ReturnBook(returnInput, checkOut.getCheckedOut());
+                else if(CheckOut.containsBook(returnInput, CheckOut.getCheckedOut())){
+                    ReturnBook.ReturnBook(returnInput, CheckOut.getCheckedOut());
                     updateBookList(booklist, BookList.getBookList());
-                    updateBookList(booksCheckedOut, checkOut.getCheckedOut());
+                    updateBookList(booksCheckedOut, CheckOut.getCheckedOut());
                     JOptionPane.showMessageDialog(null, "Thank you for returning the book");
                     returnBook.setText("");
                 } else{
@@ -114,8 +114,8 @@ public class BibliotecaInterface extends JFrame{
                 if(movieInput.equals("")){
                     JOptionPane.showMessageDialog(null, "Please enter a movie to check out");
                 }
-                else if (checkOut.containsMovie(movieInput, MovieList.getMovieList())){
-                    checkOut.checkOutMovie(movieInput, MovieList.getMovieList());
+                else if (CheckOut.containsMovie(movieInput, MovieList.getMovieList())){
+                    CheckOut.checkOutMovie(movieInput, MovieList.getMovieList());
                     updateMovieList(movielist);
                     JOptionPane.showMessageDialog(null, "Thank you! Enjoy the movie");
                     checkOutMovie.setText("");
@@ -167,7 +167,7 @@ public class BibliotecaInterface extends JFrame{
             }
         });
 
-        updateBookList(booksCheckedOut, checkOut.getCheckedOut());
+        updateBookList(booksCheckedOut, CheckOut.getCheckedOut());
     }
 
     public static void main(String[] args){

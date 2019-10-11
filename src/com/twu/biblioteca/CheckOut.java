@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.ArrayList;
 
-public class checkOut {
+public class CheckOut {
 
     private static ArrayList<Book> checkedOut = new ArrayList<Book>();
     private static ArrayList<Movie> checkedOutMovie = new ArrayList<Movie>();
