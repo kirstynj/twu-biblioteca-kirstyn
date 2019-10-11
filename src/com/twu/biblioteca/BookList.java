@@ -8,7 +8,7 @@ public class BookList {
     private static ArrayList<Book> bookList= new ArrayList<Book>();
 
 
-    public static void BookList(){
+    public void BookList(){
         bookList.add(new Book("title1", "author1", "1991"));
         bookList.add(new Book("title2", "author2", "1992"));
         bookList.add(new Book("title3", "author3", "1993"));

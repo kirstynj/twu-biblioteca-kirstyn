@@ -29,7 +29,7 @@ public class BibliotecaInterface extends JFrame{
 
     public BibliotecaInterface() {
 
-        BookList.BookList();
+        new BookList().BookList();
         MovieList.MovieList();
         listOfBooksButton.addActionListener(new ActionListener() {
             @Override

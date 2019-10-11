@@ -2,13 +2,14 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
-    public static void main(String[] args) {
-
-        WelcomeMessage.printWelcomeMessage();
-        BookList.BookList();
+    public void run(){
+        new WelcomeMessage().printWelcomeMessage();
+        new BookList().BookList();
         Menu.menu();
+    }
 
-
+    public static void main(String[] args) {
+        new BibliotecaApp().run();
     }
 
 }
