@@ -14,11 +14,15 @@ public class Menu {
             useInput(userInput);
         }
     }
-    //print menu
+
+    public static String getMenu(){
+        String menu;
+        menu = "\n Make a selection \n 1) List of books \n 0) Quit";
+        return menu;
+    }
+
     private static void printMenu(){
-        System.out.println("\n Make a selection");
-        System.out.println("1) List of books");
-        System.out.println("0) Quit");
+        System.out.println(getMenu());
     }
 
     //get user input

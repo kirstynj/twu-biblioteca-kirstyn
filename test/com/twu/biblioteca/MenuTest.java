@@ -6,6 +6,12 @@ import static org.junit.Assert.*;
 
 public class MenuTest {
 
+    @Test
+    public void shouldReturnMenu(){
+        String expectedMenu = "\n Make a selection \n 1) List of books \n 0) Quit";
+        assertEquals(expectedMenu, Menu.getMenu());
+    }
+
    // @Test (expected = NumberFormatException.class)
 
 //    @Test
